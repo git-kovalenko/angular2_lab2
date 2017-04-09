@@ -40,15 +40,21 @@ var NotesComponent = (function () {
             .then(function (response) { return response.json(); });
     };
     NotesComponent.prototype.addNote = function (note) {
-        this.http.post(this.notesUrl, note).toPromise()
-            .then(function (response) { return console.log("note sent, response", response); });
+        var _this = this;
+        console.log(note);
+        this.http.post(this.notesUrl, { text: note }).toPromise()
+            .then(function (response) {
+            console.log("note sent, response", response.json());
+            _this.notes = response.json();
+            _this.text = '';
+        });
     };
     return NotesComponent;
 }());
 NotesComponent = __decorate([
     core_1.Component({
         selector: 'notes',
-        template: "\n        <textarea [(ngModel)]=\"text\"></textarea>\n        <button (click)=\"addNote(text)\">Add</button>\n        <ul>\n            <li *ngFor=\"let note of notes; let i=index\">\n                {{note.text}} <button (click)=\"remove(i)\">remove</button>\n            </li>\n        </ul>\n    "
+        template: "\n        <textarea [(ngModel)]=\"text\" (keyup.enter)=\"addNote(text)\" placeholder=\"Type and press Enter\"></textarea>\n        <button (click)=\"addNote(text)\">Add</button>\n        <button (click)=\"getNotes()\">Get</button>\n        <ul>\n            <li *ngFor=\"let note of notes; let i=index\">\n                {{note.text}} <button (click)=\"remove(i)\">remove</button>\n            </li>\n        </ul>\n    "
     }),
     __metadata("design:paramtypes", [http_1.Http])
 ], NotesComponent);

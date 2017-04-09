@@ -26,8 +26,9 @@ app.get("/notes", function(req,res) {
 });
 app.post("/notes", function(req,res) {
     var note = req.body;
-    console.log("adding note", req.session.notes);
     req.session.notes.push(note);
+    console.log("adding note", req.session.notes);
+    res.send(req.session.notes);
     res.end();
 });
 

@@ -5,8 +5,9 @@ import 'rxjs/add/operator/toPromise';
 @Component({
     selector: 'notes',
     template: `
-        <textarea [(ngModel)]="text"></textarea>
+        <textarea [(ngModel)]="text" (keyup.enter)="addNote(text)" placeholder="Type and press Enter"></textarea>
         <button (click)="addNote(text)">Add</button>
+        <button (click)="getNotes()">Get</button>
         <ul>
             <li *ngFor="let note of notes; let i=index">
                 {{note.text}} <button (click)="remove(i)">remove</button>
@@ -19,11 +20,11 @@ export class NotesComponent {
     notes: Note[] = [
         {text:"Note one"},
         {text:"Note two"}
-    ]
+    ];
 
-    text: string
+    text: string;
     add() {
-        let note = { text: this.text }
+        let note = { text: this.text };
         this.notes.push(note);
         this.text = "";
     }
@@ -36,12 +37,17 @@ export class NotesComponent {
             .then(response => response.json() as Note[]);
     }
     addNote(note:Note) {
-        this.http.post(this.notesUrl, note).toPromise()
-            .then(response => console.log("note sent, response", response) );
+        console.log(note)
+        this.http.post(this.notesUrl, {text:note}).toPromise()
+            .then(response => {
+                    console.log("note sent, response", response.json());
+                    this.notes = response.json();
+                    this.text = '';
+            } );
     }
     constructor(private http: Http) {
         this.getNotes().then(notes=>{
-            this.notes=notes
+            this.notes=notes;
             console.log(notes);
         });
     }
