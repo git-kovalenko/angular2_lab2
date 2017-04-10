@@ -56,7 +56,7 @@ export class NotesComponent {
         console.log(id)
         let params: URLSearchParams = new URLSearchParams();
         params.set('id', id);
-        this.http.delete(this.notesUrl, { search: params })
+        this.http.delete(this.notesUrl, { search: params.toString() })
             .toPromise()
             .then(response => {
                 console.log(

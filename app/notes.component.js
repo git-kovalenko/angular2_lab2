@@ -54,7 +54,7 @@ var NotesComponent = (function () {
         console.log(id);
         var params = new URLSearchParams();
         params.set('id', id);
-        this.http.delete(this.notesUrl, { search: params })
+        this.http.delete(this.notesUrl, { search: params.toString() })
             .toPromise()
             .then(function (response) {
             console.log("note with id " + id + " removed, response", response);
