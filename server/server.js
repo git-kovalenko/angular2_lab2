@@ -2,8 +2,12 @@ var express = require('express')
 var app = express();
 var path = require('path');
 var session = require('express-session');
+var MongoStore = require('connect-mongo/es5')(session);
 app.use(express.static(path.join(__dirname, '..')));
 app.use(session({
+    store: new MongoStore({
+        url: 'mongodb://localhost:27017/angular_session'
+    }),
     secret: 'angular_tutorial',
     resave: true,
     saveUninitialized: true
