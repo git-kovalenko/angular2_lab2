@@ -16,24 +16,50 @@ var bodyParser = require('body-parser')
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
+var fs = require('fs');
+
+var Db = require('mongodb').Db;
+var Server = require('mongodb').Server;
+var db = new Db('tutor',
+    new Server("localhost", 27017, {safe: true},
+        {auto_reconnect: true}, {}));
+db.open(function(){
+    console.log("mongo db is opened!");
+    db.collection('notes', function(error, notes) {
+        db.notes = notes;
+    });
+});
+
+
+
 var notes_init = [
     {text: "First note"},
     {text: "Secwefwond note"},
     {text: "Thiewfwerd note"}
 ];
 app.get("/notes", function(req,res) {
-    console.log("reading notes", req.session.notes);
-    if (!req.session.notes) {
-        req.session.notes = notes_init;
-    }
-    res.send(req.session.notes);
+    fs.readFile("notes.json", function(err, result) {
+        if (result) {
+            result = ""+result; // convert Object to String
+            //remove last \n in file
+            result = result.substring(0, result.length - 1);
+            result = "["+result+"]";
+            result = result.split("\n").join(",");
+            res.send(result);
+        } else {
+            res.end();
+        }
+    });
 });
 app.post("/notes", function(req,res) {
     var note = req.body;
-    req.session.notes.push(note);
-    console.log("adding note", req.session.notes);
-    res.send(req.session.notes);
-    res.end();
+    var noteText = JSON.stringify(note)+"\n";
+    console.log(noteText)
+    fs.appendFile("notes.json", noteText, function(err) {
+        if (err) console.log("something is wrong");
+        // res.send(notes_init);
+        res.end();
+    });
 });
 
 

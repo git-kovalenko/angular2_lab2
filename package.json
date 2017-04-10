@@ -27,11 +27,13 @@
     "core-js": "^2.4.1",
     "express": "^4.15.2",
     "express-session": "^1.15.2",
+    "fs": "0.0.1-security",
     "nodemon": "^1.11.0",
     "reflect-metadata": "^0.1.8",
     "rxjs": "5.0.0-beta.12",
     "systemjs": "0.19.39",
-    "zone.js": "^0.6.25"
+    "zone.js": "^0.6.25",
+    "mongodb": "*"
   },
   "devDependencies": {
     "concurrently": "^3.0.0",

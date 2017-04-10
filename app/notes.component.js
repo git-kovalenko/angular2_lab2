@@ -44,8 +44,8 @@ var NotesComponent = (function () {
         console.log(note);
         this.http.post(this.notesUrl, { text: note }).toPromise()
             .then(function (response) {
-            console.log("note sent, response", response.json());
-            _this.notes = response.json();
+            console.log("note sent, response", response.text());
+            _this.notes = response.text() ? response.json() : _this.notes;
             _this.text = '';
         });
     };

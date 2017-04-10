@@ -40,8 +40,8 @@ export class NotesComponent {
         console.log(note)
         this.http.post(this.notesUrl, {text:note}).toPromise()
             .then(response => {
-                    console.log("note sent, response", response.json());
-                    this.notes = response.json();
+                    console.log("note sent, response", response.text());
+                    this.notes = response.text() ? response.json() : this.notes ;
                     this.text = '';
             } );
     }
