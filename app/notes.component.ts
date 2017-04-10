@@ -9,8 +9,8 @@ import 'rxjs/add/operator/toPromise';
         <button (click)="addNote(text)">Add</button>
         <button (click)="getNotes()">Get</button>
         <ul>
-            <li *ngFor="let note of notes; let i=index">
-                {{note.text}} <button (click)="remove(i)">remove</button>
+            <li *ngFor="let note of notes">
+                {{note.text}} <button (click)="remove(note._id)">remove</button>
             </li>
         </ul>
     `
@@ -28,9 +28,6 @@ export class NotesComponent {
         this.notes.push(note);
         this.text = "";
     }
-    remove(idx) {
-        this.notes.splice(idx,1);
-    }
     getNotes(): Promise<Note[]> {
         return this.http.get(this.notesUrl)
             .toPromise()
@@ -45,11 +42,27 @@ export class NotesComponent {
                     this.text = '';
             } );
     }
+
     constructor(private http: Http) {
+        this.readNotes();
+    }
+    readNotes() {
         this.getNotes().then(notes=>{
-            this.notes=notes;
+            this.notes=notes
             console.log(notes);
         });
+    }
+    remove(id:string) {
+        console.log(id)
+        let params: URLSearchParams = new URLSearchParams();
+        params.set('id', id);
+        this.http.delete(this.notesUrl, { search: params })
+            .toPromise()
+            .then(response => {
+                console.log(
+                    `note with id ${id} removed, response`, response);
+                this.readNotes();
+            });
     }
 }
 

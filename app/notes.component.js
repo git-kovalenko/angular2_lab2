@@ -14,25 +14,18 @@ var http_1 = require("@angular/http");
 require("rxjs/add/operator/toPromise");
 var NotesComponent = (function () {
     function NotesComponent(http) {
-        var _this = this;
         this.http = http;
         this.notesUrl = 'notes'; // URL to web api
         this.notes = [
             { text: "Note one" },
             { text: "Note two" }
         ];
-        this.getNotes().then(function (notes) {
-            _this.notes = notes;
-            console.log(notes);
-        });
+        this.readNotes();
     }
     NotesComponent.prototype.add = function () {
         var note = { text: this.text };
         this.notes.push(note);
         this.text = "";
-    };
-    NotesComponent.prototype.remove = function (idx) {
-        this.notes.splice(idx, 1);
     };
     NotesComponent.prototype.getNotes = function () {
         return this.http.get(this.notesUrl)
@@ -49,12 +42,31 @@ var NotesComponent = (function () {
             _this.text = '';
         });
     };
+    NotesComponent.prototype.readNotes = function () {
+        var _this = this;
+        this.getNotes().then(function (notes) {
+            _this.notes = notes;
+            console.log(notes);
+        });
+    };
+    NotesComponent.prototype.remove = function (id) {
+        var _this = this;
+        console.log(id);
+        var params = new URLSearchParams();
+        params.set('id', id);
+        this.http.delete(this.notesUrl, { search: params })
+            .toPromise()
+            .then(function (response) {
+            console.log("note with id " + id + " removed, response", response);
+            _this.readNotes();
+        });
+    };
     return NotesComponent;
 }());
 NotesComponent = __decorate([
     core_1.Component({
         selector: 'notes',
-        template: "\n        <textarea [(ngModel)]=\"text\" (keyup.enter)=\"addNote(text)\" placeholder=\"Type and press Enter\"></textarea>\n        <button (click)=\"addNote(text)\">Add</button>\n        <button (click)=\"getNotes()\">Get</button>\n        <ul>\n            <li *ngFor=\"let note of notes; let i=index\">\n                {{note.text}} <button (click)=\"remove(i)\">remove</button>\n            </li>\n        </ul>\n    "
+        template: "\n        <textarea [(ngModel)]=\"text\" (keyup.enter)=\"addNote(text)\" placeholder=\"Type and press Enter\"></textarea>\n        <button (click)=\"addNote(text)\">Add</button>\n        <button (click)=\"getNotes()\">Get</button>\n        <ul>\n            <li *ngFor=\"let note of notes\">\n                {{note.text}} <button (click)=\"remove(note._id)\">remove</button>\n            </li>\n        </ul>\n    "
     }),
     __metadata("design:paramtypes", [http_1.Http])
 ], NotesComponent);

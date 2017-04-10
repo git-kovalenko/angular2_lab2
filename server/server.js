@@ -19,6 +19,7 @@ app.use(bodyParser.json());
 var fs = require('fs');
 
 var Db = require('mongodb').Db;
+var ObjectID = require('mongodb').ObjectID;
 var Server = require('mongodb').Server;
 var db = new Db('tutor',
     new Server("localhost", 27017, {safe: true},
@@ -38,30 +39,28 @@ var notes_init = [
     {text: "Thiewfwerd note"}
 ];
 app.get("/notes", function(req,res) {
-    fs.readFile("notes.json", function(err, result) {
-        if (result) {
-            result = ""+result; // convert Object to String
-            //remove last \n in file
-            result = result.substring(0, result.length - 1);
-            result = "["+result+"]";
-            result = result.split("\n").join(",");
-            res.send(result);
-        } else {
-            res.end();
-        }
+    db.notes.find(req.query).toArray(function(err, items) {
+        res.send(items);
     });
 });
 app.post("/notes", function(req,res) {
-    var note = req.body;
-    var noteText = JSON.stringify(note)+"\n";
-    console.log(noteText)
-    fs.appendFile("notes.json", noteText, function(err) {
-        if (err) console.log("something is wrong");
-        // res.send(notes_init);
-        res.end();
+    db.notes.insert(req.body);
+    db.notes.find({}).toArray(function(err, items) {
+        res.send(items);
     });
-});
 
+});
+app.delete("/notes", function(req,res) {
+    var id = new ObjectID(req.query.id);
+    db.notes.remove({_id: id}, function(err){
+        if (err) {
+            console.log(err);
+            res.send("Failed");
+        } else {
+            res.send("Success");
+        }
+    })
+});
 
 app.listen(8080, function(){
     console.log('server listen on port 8080')
