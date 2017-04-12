@@ -1,3 +1,4 @@
+var c = console;
 var express = require('express')
 var app = express();
 var path = require('path');
@@ -44,7 +45,11 @@ app.get("/notes", function(req,res) {
     });
 });
 app.post("/notes", function(req,res) {
-    db.notes.insert(req.body);
+    let note = req.body;
+    note.date = new Date();
+c.log(note);
+    db.notes.insert(note);
+
     db.notes.find({}).toArray(function(err, items) {
         res.send(items);
     });

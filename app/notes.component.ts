@@ -9,8 +9,8 @@ import 'rxjs/add/operator/toPromise';
         <button (click)="addNote(text)">Add</button>
         <button (click)="getNotes()">Get</button>
         <ul>
-            <li *ngFor="let note of notes">
-                {{note.text}} <button (click)="remove(note._id)">remove</button>
+            <li *ngFor="let note of notes" class="row">
+                <div class="col-sm-4">{{note.text}}</div> {{note.date|date: 'HH:mm:ss:SS dd.MM.yyyy'}} <button (click)="remove(note._id)" class="btn-xs">remove</button>
             </li>
         </ul>
     `

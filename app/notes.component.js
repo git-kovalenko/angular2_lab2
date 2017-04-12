@@ -66,7 +66,7 @@ var NotesComponent = (function () {
 NotesComponent = __decorate([
     core_1.Component({
         selector: 'notes',
-        template: "\n        <textarea [(ngModel)]=\"text\" (keyup.enter)=\"addNote(text)\" placeholder=\"Type and press Enter\"></textarea>\n        <button (click)=\"addNote(text)\">Add</button>\n        <button (click)=\"getNotes()\">Get</button>\n        <ul>\n            <li *ngFor=\"let note of notes\">\n                {{note.text}} <button (click)=\"remove(note._id)\">remove</button>\n            </li>\n        </ul>\n    "
+        template: "\n        <textarea [(ngModel)]=\"text\" (keyup.enter)=\"addNote(text)\" placeholder=\"Type and press Enter\"></textarea>\n        <button (click)=\"addNote(text)\">Add</button>\n        <button (click)=\"getNotes()\">Get</button>\n        <ul>\n            <li *ngFor=\"let note of notes\" class=\"row\">\n                <div class=\"col-sm-4\">{{note.text}}</div> {{note.date|date: 'HH:mm:ss:SS dd.MM.yyyy'}} <button (click)=\"remove(note._id)\" class=\"btn-xs\">remove</button>\n            </li>\n        </ul>\n    "
     }),
     __metadata("design:paramtypes", [http_1.Http])
 ], NotesComponent);
