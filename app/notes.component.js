@@ -20,17 +20,17 @@ var NotesComponent = (function () {
             { text: "Note one" },
             { text: "Note two" }
         ];
-        this.readNotes();
     }
     NotesComponent.prototype.add = function () {
-        var note = { text: this.text };
+        var note = { text: this.text, section: this.section };
         this.notes.push(note);
         this.text = "";
     };
     NotesComponent.prototype.getNotes = function () {
-        return this.http.get(this.notesUrl)
-            .toPromise()
-            .then(function (response) { return response.json(); });
+        var params = new URLSearchParams();
+        params.set('section', this.section);
+        return this.http.get(this.notesUrl, { search: params.toString() })
+            .map(function (response) { return response.json(); });
     };
     NotesComponent.prototype.addNote = function (note) {
         var _this = this;
@@ -42,9 +42,13 @@ var NotesComponent = (function () {
             _this.text = '';
         });
     };
+    NotesComponent.prototype.ngOnChanges = function () {
+        this.readNotes();
+        // this.section ="Work"
+    };
     NotesComponent.prototype.readNotes = function () {
         var _this = this;
-        this.getNotes().then(function (notes) {
+        this.getNotes().subscribe(function (notes) {
             _this.notes = notes;
             console.log(notes);
         });
@@ -63,11 +67,26 @@ var NotesComponent = (function () {
     };
     return NotesComponent;
 }());
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", String)
+], NotesComponent.prototype, "section", void 0);
 NotesComponent = __decorate([
     core_1.Component({
         selector: 'notes',
-        template: "\n        <textarea [(ngModel)]=\"text\" (keyup.enter)=\"addNote(text)\" placeholder=\"Type and press Enter\"></textarea>\n        <button (click)=\"addNote(text)\">Add</button>\n        <button (click)=\"getNotes()\">Get</button>\n        <ul>\n            <li *ngFor=\"let note of notes\" class=\"row\">\n                <div class=\"col-sm-4\">{{note.text}}</div> {{note.date|date: 'HH:mm:ss:SS dd.MM.yyyy'}} <button (click)=\"remove(note._id)\" class=\"btn-xs\">remove</button>\n            </li>\n        </ul>\n    "
-    }),
+        templateUrl: './app/notes.component.html'
+    })
+    // template: `
+    //         <textarea [(ngModel)]="text" (keyup.enter)="addNote(text)" placeholder="Type and press Enter"></textarea>
+    //         <button (click)="addNote(text)">Add</button>
+    //         <button (click)="getNotes()">Get</button>
+    //         <ul>
+    //             <li *ngFor="let note of notes" class="row">
+    //                 <div class="col-sm-4">{{note.text}}</div> {{note.date|date: 'HH:mm:ss:SS dd.MM.yyyy'}} <button (click)="remove(note._id)" class="btn-xs">remove</button>
+    //             </li>
+    //         </ul>
+    //     `
+    ,
     __metadata("design:paramtypes", [http_1.Http])
 ], NotesComponent);
 exports.NotesComponent = NotesComponent;

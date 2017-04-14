@@ -30,6 +30,9 @@ db.open(function(){
     db.collection('notes', function(error, notes) {
         db.notes = notes;
     });
+    db.collection('sections', function(error, sections) {
+        db.sections = sections;
+    });
 });
 
 
@@ -66,6 +69,15 @@ app.delete("/notes", function(req,res) {
         }
     })
 });
+
+
+app.get("/sections", function(req,res) {
+    db.sections.find(req.query).toArray(function(err, items) {
+        res.send(items);
+    });
+});
+
+
 
 app.listen(8080, function(){
     console.log('server listen on port 8080')

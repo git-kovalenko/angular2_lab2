@@ -10,13 +10,19 @@ var core_1 = require("@angular/core");
 var AppComponent = (function () {
     function AppComponent() {
     }
+    AppComponent.prototype.setSection = function (section) {
+        this.section = section;
+    };
     return AppComponent;
 }());
 AppComponent = __decorate([
     core_1.Component({
         selector: 'my-app',
-        template: "\n        <h1>Notes Angular 2 App</h1>\n        <notes></notes> "
+        templateUrl: './app/app.component.html'
     })
 ], AppComponent);
 exports.AppComponent = AppComponent;
+// template: `
+//         <h1>Notes Angular 2 App</h1>
+//         <notes></notes> `
 //# sourceMappingURL=app.component.js.map
