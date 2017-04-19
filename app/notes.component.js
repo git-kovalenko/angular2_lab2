@@ -37,8 +37,6 @@ var NotesComponent = (function () {
         var _this = this;
         this.http.post(this.notesUrl, note).toPromise()
             .then(function (response) {
-            // console.log("note sent, response", response.text());
-            // this.notes = response.text() ? response.json() : this.notes ;
             _this.text = '';
         });
     };

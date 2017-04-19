@@ -17,8 +17,26 @@ var SectionsComponent = (function () {
         this.http = http;
         this.sectionsUrl = 'sections'; // URL to web api
         this.sectionChanged = new core_1.EventEmitter();
+        this.sectionsReplaceUrl = "/sections/replace";
         this.readSections();
     }
+    SectionsComponent.prototype.addSection = function (newSection) {
+        console.log(newSection.value);
+        var title = newSection.value;
+        if (!title)
+            return;
+        // check for duplicates
+        if (this.sections.map(function (s) { return s.title; }).find(function (t) { return t === title; }))
+            return;
+        var section = { title: title };
+        this.sections.unshift(section);
+        this.showSection(section);
+        // write sections to server and clear add section input box
+        this.writeSections().subscribe(function (res) { return newSection.value = ""; });
+    };
+    SectionsComponent.prototype.writeSections = function () {
+        return this.http.post(this.sectionsReplaceUrl, this.sections);
+    };
     SectionsComponent.prototype.readSections = function () {
         var _this = this;
         this.getSections().subscribe(function (sections) {

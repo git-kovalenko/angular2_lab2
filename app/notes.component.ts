@@ -44,8 +44,6 @@ export class NotesComponent implements OnChanges{
     addNote(note:Note){
         this.http.post(this.notesUrl, note).toPromise()
             .then(response => {
-                    // console.log("note sent, response", response.text());
-                    // this.notes = response.text() ? response.json() : this.notes ;
                     this.text = '';
             } );
     }

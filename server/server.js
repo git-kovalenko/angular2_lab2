@@ -67,6 +67,21 @@ app.delete("/notes", function(req,res) {
 });
 
 
+app.post("/sections/replace", function(req,resp) {
+    // do not clear the list
+    if (req.body.length==0) {
+        resp.end();
+    }
+    db.sections.remove({}, function(err, res) {
+        if (err) console.log(err);
+c.log(req.body)
+        db.sections.insert(req.body, function(err, res) {
+            if (err) console.log("err after insert",err);
+            resp.end();
+        });
+    });
+});
+
 app.get("/sections", function(req,res) {
     db.sections.find(req.query).toArray(function(err, items) {
         res.send(items);

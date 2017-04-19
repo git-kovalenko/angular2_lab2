@@ -14,6 +14,25 @@ export class SectionsComponent {
     activeSection:string;
 
     @Output() sectionChanged: EventEmitter<string> = new EventEmitter<string>();
+    sectionsReplaceUrl = "/sections/replace";
+    addSection(newSection: HTMLInputElement) {
+        console.log(newSection.value);
+        let title = newSection.value;
+        if (!title) return;
+
+        // check for duplicates
+        if (this.sections.map(s=>s.title).find(t=>t===title)) return;
+
+        const section: Section = { title };
+        this.sections.unshift(section);
+        this.showSection(section);
+
+        // write sections to server and clear add section input box
+        this.writeSections().subscribe(res=>newSection.value = "");
+    }
+    writeSections() {
+        return this.http.post(this.sectionsReplaceUrl, this.sections);
+    }
 
     readSections() {
         this.getSections().subscribe(sections=>{
@@ -38,7 +57,7 @@ export class SectionsComponent {
     }
 }
 
-interface Section {
-    _id: string;
+export interface Section {
+    _id?: string;
     title: string;
 }
