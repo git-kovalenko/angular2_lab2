@@ -8,7 +8,7 @@ import { SectionsComponent } from './sections.component';
 import { HttpModule }    from '@angular/http';
 
 @NgModule({
-    imports:      [ BrowserModule, FormsModule, HttpModule ],
+    imports:      [ BrowserModule, FormsModule, HttpModule, DragulaModule ],
     declarations: [ AppComponent, NotesComponent, SectionsComponent ],
     bootstrap:    [ AppComponent ]
 })
