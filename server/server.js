@@ -52,11 +52,7 @@ app.post("/notes", function(req,res) {
     note.date = new Date();
 c.log(note);
     db.notes.insert(note);
-
-    db.notes.find({}).toArray(function(err, items) {
-        res.send(items);
-    });
-
+    res.end();
 });
 app.delete("/notes", function(req,res) {
     var id = new ObjectID(req.query.id);

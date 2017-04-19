@@ -24,31 +24,33 @@ export class NotesComponent implements OnChanges{
         {text:"Note two"}
     ];
     text: string;
+
     @Input() section:string;
 
     add() {
         let note = { text: this.text, section: this.section };
         this.notes.push(note);
-        this.text = "";
+        this.addNote(note);
     }
+
     getNotes(): Observable<Note[]> {
+        console.log(this.section)
         let params: URLSearchParams = new URLSearchParams();
         params.set('section', this.section);
         return this.http.get(this.notesUrl, {search: params.toString()})
             .map(response => response.json() as Note[]);
     }
-    addNote(note:Note) {
-        console.log(note)
-        this.http.post(this.notesUrl, {text:note}).toPromise()
+
+    addNote(note:Note){
+        this.http.post(this.notesUrl, note).toPromise()
             .then(response => {
-                    console.log("note sent, response", response.text());
-                    this.notes = response.text() ? response.json() : this.notes ;
+                    // console.log("note sent, response", response.text());
+                    // this.notes = response.text() ? response.json() : this.notes ;
                     this.text = '';
             } );
     }
     ngOnChanges(){
         this.readNotes();
-        // this.section ="Work"
     }
 
     constructor(private http: Http) {

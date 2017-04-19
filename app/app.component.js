@@ -11,6 +11,7 @@ var AppComponent = (function () {
     function AppComponent() {
     }
     AppComponent.prototype.setSection = function (section) {
+        console.log('app.component  - ' + section);
         this.section = section;
     };
     return AppComponent;

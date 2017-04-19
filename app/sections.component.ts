@@ -13,8 +13,7 @@ export class SectionsComponent {
     sections: Section[];
     activeSection:string;
 
-    @Output() sectionChanged: EventEmitter<string> =
-        new EventEmitter<string>();
+    @Output() sectionChanged: EventEmitter<string> = new EventEmitter<string>();
 
     readSections() {
         this.getSections().subscribe(sections=>{

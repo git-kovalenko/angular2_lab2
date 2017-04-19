@@ -24,9 +24,10 @@ var NotesComponent = (function () {
     NotesComponent.prototype.add = function () {
         var note = { text: this.text, section: this.section };
         this.notes.push(note);
-        this.text = "";
+        this.addNote(note);
     };
     NotesComponent.prototype.getNotes = function () {
+        console.log(this.section);
         var params = new URLSearchParams();
         params.set('section', this.section);
         return this.http.get(this.notesUrl, { search: params.toString() })
@@ -34,17 +35,15 @@ var NotesComponent = (function () {
     };
     NotesComponent.prototype.addNote = function (note) {
         var _this = this;
-        console.log(note);
-        this.http.post(this.notesUrl, { text: note }).toPromise()
+        this.http.post(this.notesUrl, note).toPromise()
             .then(function (response) {
-            console.log("note sent, response", response.text());
-            _this.notes = response.text() ? response.json() : _this.notes;
+            // console.log("note sent, response", response.text());
+            // this.notes = response.text() ? response.json() : this.notes ;
             _this.text = '';
         });
     };
     NotesComponent.prototype.ngOnChanges = function () {
         this.readNotes();
-        // this.section ="Work"
     };
     NotesComponent.prototype.readNotes = function () {
         var _this = this;
