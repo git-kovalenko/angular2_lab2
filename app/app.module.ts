@@ -6,6 +6,7 @@ import { AppComponent }   from './app.component';
 import { NotesComponent } from './notes.component';
 import { SectionsComponent } from './sections.component';
 import { HttpModule }    from '@angular/http';
+import {DragulaModule} from "ng2-dragula";
 
 @NgModule({
     imports:      [ BrowserModule, FormsModule, HttpModule, DragulaModule ],

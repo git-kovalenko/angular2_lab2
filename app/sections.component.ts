@@ -2,6 +2,7 @@ import {Component, Output, EventEmitter} from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/Rx';
 import {Observable} from "rxjs/Rx";
+import {DragulaService} from "ng2-dragula";
 
 @Component({
     selector: 'sections',
@@ -15,6 +16,19 @@ export class SectionsComponent {
 
     @Output() sectionChanged: EventEmitter<string> = new EventEmitter<string>();
     sectionsReplaceUrl = "/sections/replace";
+
+    onDrop(value) {
+        let [bag, elementMoved, targetContainer, srcContainer] = value;
+        if (targetContainer.children) {
+            let arr = Array.from(targetContainer.children);
+            this.sections = arr.map((li:HTMLLIElement)=>
+            { return {title: li.textContent.trim() } });
+            this.writeSections().subscribe();
+        }
+    }
+
+
+
     addSection(newSection: HTMLInputElement) {
         console.log(newSection.value);
         let title = newSection.value;
@@ -52,8 +66,9 @@ export class SectionsComponent {
         this.sectionChanged.emit(this.activeSection);
     }
 
-    constructor(private http: Http) {
+    constructor(private http: Http, private dragulaService: DragulaService) {
         this.readSections();
+        dragulaService.drop.subscribe(this.onDrop.bind(this));
     }
 }
 

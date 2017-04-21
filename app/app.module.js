@@ -13,6 +13,7 @@ var app_component_1 = require("./app.component");
 var notes_component_1 = require("./notes.component");
 var sections_component_1 = require("./sections.component");
 var http_1 = require("@angular/http");
+var ng2_dragula_1 = require("ng2-dragula");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -20,7 +21,7 @@ var AppModule = (function () {
 }());
 AppModule = __decorate([
     core_1.NgModule({
-        imports: [platform_browser_1.BrowserModule, forms_1.FormsModule, http_1.HttpModule, DragulaModule],
+        imports: [platform_browser_1.BrowserModule, forms_1.FormsModule, http_1.HttpModule, ng2_dragula_1.DragulaModule],
         declarations: [app_component_1.AppComponent, notes_component_1.NotesComponent, sections_component_1.SectionsComponent],
         bootstrap: [app_component_1.AppComponent]
     })

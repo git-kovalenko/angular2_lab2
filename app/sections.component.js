@@ -12,14 +12,25 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var http_1 = require("@angular/http");
 require("rxjs/Rx");
+var ng2_dragula_1 = require("ng2-dragula");
 var SectionsComponent = (function () {
-    function SectionsComponent(http) {
+    function SectionsComponent(http, dragulaService) {
         this.http = http;
+        this.dragulaService = dragulaService;
         this.sectionsUrl = 'sections'; // URL to web api
         this.sectionChanged = new core_1.EventEmitter();
         this.sectionsReplaceUrl = "/sections/replace";
         this.readSections();
+        dragulaService.drop.subscribe(this.onDrop.bind(this));
     }
+    SectionsComponent.prototype.onDrop = function (value) {
+        var bag = value[0], elementMoved = value[1], targetContainer = value[2], srcContainer = value[3];
+        if (targetContainer.children) {
+            var arr = Array.from(targetContainer.children);
+            this.sections = arr.map(function (li) { return { title: li.textContent.trim() }; });
+            this.writeSections().subscribe();
+        }
+    };
     SectionsComponent.prototype.addSection = function (newSection) {
         console.log(newSection.value);
         var title = newSection.value;
@@ -65,7 +76,7 @@ SectionsComponent = __decorate([
         selector: 'sections',
         templateUrl: './app/sections.component.html'
     }),
-    __metadata("design:paramtypes", [http_1.Http])
+    __metadata("design:paramtypes", [http_1.Http, ng2_dragula_1.DragulaService])
 ], SectionsComponent);
 exports.SectionsComponent = SectionsComponent;
 //# sourceMappingURL=sections.component.js.map
