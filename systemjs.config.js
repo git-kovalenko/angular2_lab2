@@ -26,7 +26,7 @@
       'rxjs':                      'npm:rxjs',
       'angular-in-memory-web-api': 'npm:angular-in-memory-web-api',
 
-      'ng2-dragula': 'npm:ng2-dragula',
+      'ng2-dragula': 'npm:ng2-dragula/ng2-dragula',
       'dragula': 	'npm:dragula/dist/dragula.js'
     },
     // packages tells the System loader how to load when no filename and/or no extension
