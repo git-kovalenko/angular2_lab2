@@ -11,16 +11,19 @@ import {SectionFilterPipe} from "./SectionFilterPipe";
 import {RouterModule, Routes} from "@angular/router";
 import {NotesEditorComponent} from "./NotesEditorComponent";
 import {PageNotFoundComponent} from "./PageNotFoundComponent";
+import {ViewSectionComponent} from "./ViewSectionComponent";
 
 
 const appRoutes: Routes = [
     {path: '', component: NotesEditorComponent},
+    {path: 'viewSection/:name', component: ViewSectionComponent},
+
     {path: '**', component: PageNotFoundComponent}
 ];
 
 @NgModule({
     imports:      [ BrowserModule, FormsModule, HttpModule, DragulaModule, RouterModule.forRoot(appRoutes) ],
-    declarations: [ AppComponent, NotesComponent, SectionsComponent, SectionFilterPipe, NotesEditorComponent, PageNotFoundComponent ],
+    declarations: [ AppComponent, NotesComponent, SectionsComponent, SectionFilterPipe, NotesEditorComponent, PageNotFoundComponent, ViewSectionComponent ],
     bootstrap:    [ AppComponent ]
 })
 
