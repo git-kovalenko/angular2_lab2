@@ -15,6 +15,13 @@ var sections_component_1 = require("./sections.component");
 var http_1 = require("@angular/http");
 var ng2_dragula_1 = require("ng2-dragula");
 var SectionFilterPipe_1 = require("./SectionFilterPipe");
+var router_1 = require("@angular/router");
+var NotesEditorComponent_1 = require("./NotesEditorComponent");
+var PageNotFoundComponent_1 = require("./PageNotFoundComponent");
+var appRoutes = [
+    { path: '', component: NotesEditorComponent_1.NotesEditorComponent },
+    { path: '**', component: PageNotFoundComponent_1.PageNotFoundComponent }
+];
 var AppModule = (function () {
     function AppModule() {
     }
@@ -22,8 +29,8 @@ var AppModule = (function () {
 }());
 AppModule = __decorate([
     core_1.NgModule({
-        imports: [platform_browser_1.BrowserModule, forms_1.FormsModule, http_1.HttpModule, ng2_dragula_1.DragulaModule],
-        declarations: [app_component_1.AppComponent, notes_component_1.NotesComponent, sections_component_1.SectionsComponent, SectionFilterPipe_1.SectionFilterPipe],
+        imports: [platform_browser_1.BrowserModule, forms_1.FormsModule, http_1.HttpModule, ng2_dragula_1.DragulaModule, router_1.RouterModule.forRoot(appRoutes)],
+        declarations: [app_component_1.AppComponent, notes_component_1.NotesComponent, sections_component_1.SectionsComponent, SectionFilterPipe_1.SectionFilterPipe, NotesEditorComponent_1.NotesEditorComponent, PageNotFoundComponent_1.PageNotFoundComponent],
         bootstrap: [app_component_1.AppComponent]
     })
 ], AppModule);

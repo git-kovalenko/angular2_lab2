@@ -7,19 +7,20 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
-var AppComponent = (function () {
-    function AppComponent() {
+var NotesEditorComponent = (function () {
+    function NotesEditorComponent() {
     }
-    return AppComponent;
+    NotesEditorComponent.prototype.setSection = function (section) {
+        console.log('app.component  - ' + section);
+        this.section = section;
+    };
+    return NotesEditorComponent;
 }());
-AppComponent = __decorate([
+NotesEditorComponent = __decorate([
     core_1.Component({
-        selector: 'my-app',
-        templateUrl: './app/app.component.html'
+        selector: "NotesEditorComponent",
+        templateUrl: "./app/NotesEditorComponent.html"
     })
-], AppComponent);
-exports.AppComponent = AppComponent;
-// template: `
-//         <h1>Notes Angular 2 App</h1>
-//         <notes></notes> `
-//# sourceMappingURL=app.component.js.map
+], NotesEditorComponent);
+exports.NotesEditorComponent = NotesEditorComponent;
+//# sourceMappingURL=NotesEditorComponent.js.map
