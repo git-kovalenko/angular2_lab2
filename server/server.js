@@ -1,10 +1,11 @@
 var c = console;
+var root = __dirname + '/..'
 var express = require('express')
 var app = express();
 var path = require('path');
 var session = require('express-session');
 var MongoStore = require('connect-mongo/es5')(session);
-app.use(express.static(path.join(__dirname, '..')));
+app.use(express.static(root));
 app.use(session({
     store: new MongoStore({
         url: 'mongodb://localhost:27017/angular_session'
@@ -94,17 +95,6 @@ app.listen(8080, function(){
     console.log('server listen on port 8080')
 });
 
-/*
-
-FOLDER STRUCTURE:
-
-root
-  app 
-  server
-     server.js
-	 package.json
-  index.html
-  package.json
-  
-*/
-  
+app.get('*', function (req, res, next) {
+   res.sendFile('index.html', {root:root});
+});

@@ -5,6 +5,7 @@
 (function (global) {
   System.config({
     defaultJSExtensions: "js",
+    baseURL: '/',
     paths: {
       // paths serve as alias
       'npm:': 'node_modules/'
