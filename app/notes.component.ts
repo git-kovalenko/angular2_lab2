@@ -38,7 +38,7 @@ export class NotesComponent implements OnChanges{
         this.readNotes();
     }
     readNotes() {
-        this.getNotes().subscribe(notes=>{
+        this.notesServer.getNotes(this.section).subscribe(notes=>{
             this.notes=notes
             console.log(notes);
         });
@@ -66,6 +66,6 @@ export class NotesComponent implements OnChanges{
 //                 <div class="col-sm-4">{{note.text}}</div> {{note.date|date: 'HH:mm:ss:SS dd.MM.yyyy'}} <button (click)="remove(note._id)" class="btn-xs">remove</button>
 //             </li>
 //         </ul>
-interface Note {
+export interface Note {
     text: string;
 }

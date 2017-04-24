@@ -13,9 +13,9 @@ var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 var NotesServerService_1 = require("./services/NotesServerService");
 var ViewSectionComponent = (function () {
-    function ViewSectionComponent(route, noteServer) {
+    function ViewSectionComponent(route, notesServer) {
         this.route = route;
-        this.noteServer = noteServer;
+        this.notesServer = notesServer;
     }
     ViewSectionComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -23,7 +23,7 @@ var ViewSectionComponent = (function () {
         this.getNotes().subscribe(function (notes) { return _this.notes = notes; });
     };
     ViewSectionComponent.prototype.getNotes = function () {
-        return this.noteServer.getNotes(this.section);
+        return this.notesServer.getNotes(this.section);
     };
     return ViewSectionComponent;
 }());

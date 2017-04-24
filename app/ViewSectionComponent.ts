@@ -2,6 +2,7 @@ import {Component} from "@angular/core";
 import {ActivatedRoute} from "@angular/router";
 import {Section} from "./sections.component";
 import {NotesServerService} from "./services/NotesServerService";
+import {Note} from "./notes.component";
 
 @Component({
     selector: 'ViewSectionComponent',
@@ -9,15 +10,15 @@ import {NotesServerService} from "./services/NotesServerService";
 })
 
 export class ViewSectionComponent {
-    constructor(private route: ActivatedRoute, private noteServer: NotesServerService){
+    constructor(private route: ActivatedRoute, private notesServer: NotesServerService){
     }
-    section: Section;
+    section: string;
     notes: Note[];
     ngOnInit(){
         this.section = this.route.snapshot.params["name"];
         this.getNotes().subscribe(notes=>this.notes = notes)
     }
     getNotes(){
-        return this.noteServer.getNotes(this.section);
+        return this.notesServer.getNotes(this.section);
     }
 }

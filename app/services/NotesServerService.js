@@ -10,14 +10,16 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
+var http_1 = require("@angular/http");
 var NotesServerService = (function () {
+    //section: string;
     function NotesServerService(http) {
         this.http = http;
         this.notesUrl = 'notes';
     }
-    NotesServerService.prototype.getNotes = function () {
+    NotesServerService.prototype.getNotes = function (section) {
         var params = new URLSearchParams();
-        params.set('section', this.section);
+        params.set('section', section);
         return this.http.get(this.notesUrl, { search: params.toString() })
             .map(function (response) { return response.json(); });
     };
@@ -25,7 +27,7 @@ var NotesServerService = (function () {
 }());
 NotesServerService = __decorate([
     core_1.Injectable(),
-    __metadata("design:paramtypes", [Object])
+    __metadata("design:paramtypes", [http_1.Http])
 ], NotesServerService);
 exports.NotesServerService = NotesServerService;
 //# sourceMappingURL=NotesServerService.js.map

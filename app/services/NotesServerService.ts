@@ -1,15 +1,18 @@
 import {Injectable} from "@angular/core";
-import {Section} from "../sections.component";
+import {Note} from "../notes.component";
+import {Observable} from "rxjs";
+import {Http} from "@angular/http";
 
 @Injectable()
 export class NotesServerService{
     private notesUrl = 'notes';
-    section: Section;
+    //section: string;
     constructor(private http: Http){}
 
-    getNotes(): Observable<Note[]> {
+    getNotes(section: string): Observable<Note[]> {
+
         let params: URLSearchParams = new URLSearchParams();
-        params.set('section', this.section);
+        params.set('section', section);
         return this.http.get(this.notesUrl, {search: params.toString()})
             .map(response => response.json() as Note[]);
     }

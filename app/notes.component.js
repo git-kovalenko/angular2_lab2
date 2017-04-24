@@ -40,7 +40,7 @@ var NotesComponent = (function () {
     };
     NotesComponent.prototype.readNotes = function () {
         var _this = this;
-        this.getNotes().subscribe(function (notes) {
+        this.notesServer.getNotes(this.section).subscribe(function (notes) {
             _this.notes = notes;
             console.log(notes);
         });
