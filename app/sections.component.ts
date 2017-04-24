@@ -1,4 +1,4 @@
-import {Component, Output, EventEmitter} from '@angular/core';
+import {Component, Output, EventEmitter, Input} from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/Rx';
 import {Observable} from "rxjs/Rx";
@@ -16,6 +16,13 @@ export class SectionsComponent {
 
     @Output() sectionChanged: EventEmitter<string> = new EventEmitter<string>();
     sectionsReplaceUrl = "/sections/replace";
+
+    @Input()
+    set section(section:string){
+        if(section && section.length>0){
+            this.activeSection = section;
+        }
+    }
 
     onDrop(value) {
         let [bag, elementMoved, targetContainer, srcContainer] = value;

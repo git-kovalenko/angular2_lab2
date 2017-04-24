@@ -23,6 +23,15 @@ var SectionsComponent = (function () {
         this.readSections();
         dragulaService.drop.subscribe(this.onDrop.bind(this));
     }
+    Object.defineProperty(SectionsComponent.prototype, "section", {
+        set: function (section) {
+            if (section && section.length > 0) {
+                this.activeSection = section;
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
     SectionsComponent.prototype.onDrop = function (value) {
         var bag = value[0], elementMoved = value[1], targetContainer = value[2], srcContainer = value[3];
         if (targetContainer.children) {
@@ -71,6 +80,11 @@ __decorate([
     core_1.Output(),
     __metadata("design:type", core_1.EventEmitter)
 ], SectionsComponent.prototype, "sectionChanged", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", String),
+    __metadata("design:paramtypes", [String])
+], SectionsComponent.prototype, "section", null);
 SectionsComponent = __decorate([
     core_1.Component({
         selector: 'sections',

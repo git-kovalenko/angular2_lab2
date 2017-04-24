@@ -23,6 +23,7 @@ var NotesServerService_1 = require("./services/NotesServerService");
 var appRoutes = [
     { path: '', component: NotesEditorComponent_1.NotesEditorComponent },
     { path: 'viewSection/:name', component: ViewSectionComponent_1.ViewSectionComponent },
+    { path: ':name', component: NotesEditorComponent_1.NotesEditorComponent },
     { path: '**', component: PageNotFoundComponent_1.PageNotFoundComponent }
 ];
 var AppModule = (function () {
