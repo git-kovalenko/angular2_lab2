@@ -1,5 +1,5 @@
 <div class="input-group" style="padding-bottom:20px">
-    <input type="text" class="form-control" placeholder="New section name" #newSection>
+    <input type="text" class="form-control" placeholder="New section name" #newSection (keyup.enter)="addSection(newSection)">
     <span class="input-group-btn">
         <button class="btn btn-default" type="button" (click)="addSection(newSection)">Add</button>
     </span>

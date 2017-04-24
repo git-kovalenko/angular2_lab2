@@ -12,9 +12,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var http_1 = require("@angular/http");
 require("rxjs/add/operator/toPromise");
+var NotesServerService_1 = require("./services/NotesServerService");
 var NotesComponent = (function () {
-    function NotesComponent(http) {
+    function NotesComponent(http, notesServer) {
         this.http = http;
+        this.notesServer = notesServer;
         this.notesUrl = 'notes'; // URL to web api
         this.notes = [
             { text: "Note one" },
@@ -25,13 +27,6 @@ var NotesComponent = (function () {
         var note = { text: this.text, section: this.section };
         this.notes.push(note);
         this.addNote(note);
-    };
-    NotesComponent.prototype.getNotes = function () {
-        console.log(this.section);
-        var params = new URLSearchParams();
-        params.set('section', this.section);
-        return this.http.get(this.notesUrl, { search: params.toString() })
-            .map(function (response) { return response.json(); });
     };
     NotesComponent.prototype.addNote = function (note) {
         var _this = this;
@@ -73,18 +68,9 @@ NotesComponent = __decorate([
         selector: 'notes',
         templateUrl: './app/notes.component.html'
     })
-    // template: `
-    //         <textarea [(ngModel)]="text" (keyup.enter)="addNote(text)" placeholder="Type and press Enter"></textarea>
-    //         <button (click)="addNote(text)">Add</button>
-    //         <button (click)="getNotes()">Get</button>
-    //         <ul>
-    //             <li *ngFor="let note of notes" class="row">
-    //                 <div class="col-sm-4">{{note.text}}</div> {{note.date|date: 'HH:mm:ss:SS dd.MM.yyyy'}} <button (click)="remove(note._id)" class="btn-xs">remove</button>
-    //             </li>
-    //         </ul>
     //     `
     ,
-    __metadata("design:paramtypes", [http_1.Http])
+    __metadata("design:paramtypes", [http_1.Http, NotesServerService_1.NotesServerService])
 ], NotesComponent);
 exports.NotesComponent = NotesComponent;
 //# sourceMappingURL=notes.component.js.map

@@ -19,6 +19,7 @@ var router_1 = require("@angular/router");
 var NotesEditorComponent_1 = require("./NotesEditorComponent");
 var PageNotFoundComponent_1 = require("./PageNotFoundComponent");
 var ViewSectionComponent_1 = require("./ViewSectionComponent");
+var NotesServerService_1 = require("./services/NotesServerService");
 var appRoutes = [
     { path: '', component: NotesEditorComponent_1.NotesEditorComponent },
     { path: 'viewSection/:name', component: ViewSectionComponent_1.ViewSectionComponent },
@@ -33,7 +34,8 @@ AppModule = __decorate([
     core_1.NgModule({
         imports: [platform_browser_1.BrowserModule, forms_1.FormsModule, http_1.HttpModule, ng2_dragula_1.DragulaModule, router_1.RouterModule.forRoot(appRoutes)],
         declarations: [app_component_1.AppComponent, notes_component_1.NotesComponent, sections_component_1.SectionsComponent, SectionFilterPipe_1.SectionFilterPipe, NotesEditorComponent_1.NotesEditorComponent, PageNotFoundComponent_1.PageNotFoundComponent, ViewSectionComponent_1.ViewSectionComponent],
-        bootstrap: [app_component_1.AppComponent]
+        bootstrap: [app_component_1.AppComponent],
+        providers: [NotesServerService_1.NotesServerService]
     })
 ], AppModule);
 exports.AppModule = AppModule;

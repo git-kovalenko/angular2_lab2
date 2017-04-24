@@ -11,12 +11,19 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
+var NotesServerService_1 = require("./services/NotesServerService");
 var ViewSectionComponent = (function () {
-    function ViewSectionComponent(route) {
+    function ViewSectionComponent(route, noteServer) {
         this.route = route;
+        this.noteServer = noteServer;
     }
     ViewSectionComponent.prototype.ngOnInit = function () {
+        var _this = this;
         this.section = this.route.snapshot.params["name"];
+        this.getNotes().subscribe(function (notes) { return _this.notes = notes; });
+    };
+    ViewSectionComponent.prototype.getNotes = function () {
+        return this.noteServer.getNotes(this.section);
     };
     return ViewSectionComponent;
 }());
@@ -25,7 +32,7 @@ ViewSectionComponent = __decorate([
         selector: 'ViewSectionComponent',
         templateUrl: './app/viewSection.component.html'
     }),
-    __metadata("design:paramtypes", [router_1.ActivatedRoute])
+    __metadata("design:paramtypes", [router_1.ActivatedRoute, NotesServerService_1.NotesServerService])
 ], ViewSectionComponent);
 exports.ViewSectionComponent = ViewSectionComponent;
 //# sourceMappingURL=ViewSectionComponent.js.map

@@ -12,6 +12,7 @@ import {RouterModule, Routes} from "@angular/router";
 import {NotesEditorComponent} from "./NotesEditorComponent";
 import {PageNotFoundComponent} from "./PageNotFoundComponent";
 import {ViewSectionComponent} from "./ViewSectionComponent";
+import {NotesServerService} from "./services/NotesServerService";
 
 
 const appRoutes: Routes = [
@@ -24,7 +25,8 @@ const appRoutes: Routes = [
 @NgModule({
     imports:      [ BrowserModule, FormsModule, HttpModule, DragulaModule, RouterModule.forRoot(appRoutes) ],
     declarations: [ AppComponent, NotesComponent, SectionsComponent, SectionFilterPipe, NotesEditorComponent, PageNotFoundComponent, ViewSectionComponent ],
-    bootstrap:    [ AppComponent ]
+    bootstrap:    [ AppComponent ],
+    providers:    [ NotesServerService ]
 })
 
 
