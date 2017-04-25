@@ -14,6 +14,7 @@ import {PageNotFoundComponent} from "./PageNotFoundComponent";
 import {ViewSectionComponent} from "./ViewSectionComponent";
 import {NotesServerService} from "./services/NotesServerService";
 import {CanDeactivateNote} from "./CanDeactivateNote";
+import {UserFormComponent} from "./userForm/userForm.component";
 
 
 const appRoutes: Routes = [
@@ -27,7 +28,7 @@ const appRoutes: Routes = [
 
 @NgModule({
     imports:      [ BrowserModule, FormsModule, HttpModule, DragulaModule, RouterModule.forRoot(appRoutes) ],
-    declarations: [ AppComponent, NotesComponent, SectionsComponent, SectionFilterPipe, NotesEditorComponent, PageNotFoundComponent, ViewSectionComponent ],
+    declarations: [ AppComponent, NotesComponent, SectionsComponent, SectionFilterPipe, NotesEditorComponent, PageNotFoundComponent, ViewSectionComponent, UserFormComponent ],
     bootstrap:    [ AppComponent ],
     providers:    [ NotesServerService, CanDeactivateNote ]
 })
