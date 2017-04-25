@@ -19,6 +19,8 @@ import {CanDeactivateNote} from "./CanDeactivateNote";
 const appRoutes: Routes = [
     {path: '', component: NotesEditorComponent, canDeactivate:[CanDeactivateNote]},
     {path: 'viewSection/:name', component: ViewSectionComponent},
+    {path: 'register', component: UserFormComponent},
+
     {path: ':name', component: NotesEditorComponent, canDeactivate: [CanDeactivateNote]},
     {path: '**', component: PageNotFoundComponent}
 ];

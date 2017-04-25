@@ -24,6 +24,7 @@ var CanDeactivateNote_1 = require("./CanDeactivateNote");
 var appRoutes = [
     { path: '', component: NotesEditorComponent_1.NotesEditorComponent, canDeactivate: [CanDeactivateNote_1.CanDeactivateNote] },
     { path: 'viewSection/:name', component: ViewSectionComponent_1.ViewSectionComponent },
+    { path: 'register', component: UserFormComponent },
     { path: ':name', component: NotesEditorComponent_1.NotesEditorComponent, canDeactivate: [CanDeactivateNote_1.CanDeactivateNote] },
     { path: '**', component: PageNotFoundComponent_1.PageNotFoundComponent }
 ];
