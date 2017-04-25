@@ -71,8 +71,8 @@ var SectionsComponent = (function () {
             .map(function (response) { return response.json(); });
     };
     SectionsComponent.prototype.showSection = function (section) {
-        this.activeSection = section.title;
-        this.sectionChanged.emit(this.activeSection);
+        // this.activeSection = section.title;
+        this.sectionChanged.emit(section.title);
     };
     return SectionsComponent;
 }());

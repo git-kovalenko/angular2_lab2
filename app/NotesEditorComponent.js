@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
+var notes_component_1 = require("./notes.component");
 var NotesEditorComponent = (function () {
     function NotesEditorComponent(route, router) {
         var _this = this;
@@ -22,11 +23,15 @@ var NotesEditorComponent = (function () {
     }
     NotesEditorComponent.prototype.setSection = function (section) {
         console.log('app.component  - ' + section);
-        this.section = section;
+        // this.section = section;
         this.router.navigate([section]);
     };
     return NotesEditorComponent;
 }());
+__decorate([
+    core_1.ViewChild(notes_component_1.NotesComponent),
+    __metadata("design:type", notes_component_1.NotesComponent)
+], NotesEditorComponent.prototype, "notesComponent", void 0);
 NotesEditorComponent = __decorate([
     core_1.Component({
         selector: "NotesEditorComponent",

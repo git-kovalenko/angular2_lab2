@@ -18,9 +18,9 @@ var ViewSectionComponent = (function () {
         this.notesServer = notesServer;
     }
     ViewSectionComponent.prototype.ngOnInit = function () {
-        var _this = this;
         this.section = this.route.snapshot.params["name"];
-        this.getNotes().subscribe(function (notes) { return _this.notes = notes; });
+        // this.getNotes().subscribe(notes=>this.notes = notes)
+        this.notes$ = this.getNotes();
     };
     ViewSectionComponent.prototype.getNotes = function () {
         return this.notesServer.getNotes(this.section);

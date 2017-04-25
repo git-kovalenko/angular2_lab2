@@ -69,8 +69,8 @@ export class SectionsComponent {
             .map(response => response.json() as Section[]);
     }
     showSection(section:Section) {
-        this.activeSection = section.title;
-        this.sectionChanged.emit(this.activeSection);
+        // this.activeSection = section.title;
+        this.sectionChanged.emit(section.title);
     }
 
     constructor(private http: Http, private dragulaService: DragulaService) {

@@ -3,6 +3,7 @@ import {ActivatedRoute} from "@angular/router";
 import {Section} from "./sections.component";
 import {NotesServerService} from "./services/NotesServerService";
 import {Note} from "./notes.component";
+import {Observable} from "rxjs";
 
 @Component({
     selector: 'ViewSectionComponent',
@@ -14,9 +15,11 @@ export class ViewSectionComponent {
     }
     section: string;
     notes: Note[];
+    notes$: Observable<Note[]>;
     ngOnInit(){
         this.section = this.route.snapshot.params["name"];
-        this.getNotes().subscribe(notes=>this.notes = notes)
+        // this.getNotes().subscribe(notes=>this.notes = notes)
+        this.notes$ = this.getNotes();
     }
     getNotes(){
         return this.notesServer.getNotes(this.section);

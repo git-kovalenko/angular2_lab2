@@ -20,10 +20,11 @@ var NotesEditorComponent_1 = require("./NotesEditorComponent");
 var PageNotFoundComponent_1 = require("./PageNotFoundComponent");
 var ViewSectionComponent_1 = require("./ViewSectionComponent");
 var NotesServerService_1 = require("./services/NotesServerService");
+var CanDeactivateNote_1 = require("./CanDeactivateNote");
 var appRoutes = [
-    { path: '', component: NotesEditorComponent_1.NotesEditorComponent },
+    { path: '', component: NotesEditorComponent_1.NotesEditorComponent, canDeactivate: [CanDeactivateNote_1.CanDeactivateNote] },
     { path: 'viewSection/:name', component: ViewSectionComponent_1.ViewSectionComponent },
-    { path: ':name', component: NotesEditorComponent_1.NotesEditorComponent },
+    { path: ':name', component: NotesEditorComponent_1.NotesEditorComponent, canDeactivate: [CanDeactivateNote_1.CanDeactivateNote] },
     { path: '**', component: PageNotFoundComponent_1.PageNotFoundComponent }
 ];
 var AppModule = (function () {
@@ -36,7 +37,7 @@ AppModule = __decorate([
         imports: [platform_browser_1.BrowserModule, forms_1.FormsModule, http_1.HttpModule, ng2_dragula_1.DragulaModule, router_1.RouterModule.forRoot(appRoutes)],
         declarations: [app_component_1.AppComponent, notes_component_1.NotesComponent, sections_component_1.SectionsComponent, SectionFilterPipe_1.SectionFilterPipe, NotesEditorComponent_1.NotesEditorComponent, PageNotFoundComponent_1.PageNotFoundComponent, ViewSectionComponent_1.ViewSectionComponent],
         bootstrap: [app_component_1.AppComponent],
-        providers: [NotesServerService_1.NotesServerService]
+        providers: [NotesServerService_1.NotesServerService, CanDeactivateNote_1.CanDeactivateNote]
     })
 ], AppModule);
 exports.AppModule = AppModule;
