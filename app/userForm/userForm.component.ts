@@ -1,5 +1,7 @@
 import {Component} from "@angular/core";
 import {User} from "./model/User";
+import {Http} from "@angular/http";
+import {Router} from "@angular/router";
 
 @Component({
     selector:'userForm',
@@ -19,7 +21,12 @@ export class UserFormComponent {
         email:'',
         dateOfBirth: null
     };
-
+    constructor( private http: Http, private router: Router) {};
+    onSubmit() {
+        this.http.post("users", this.user).subscribe(res=>{
+            this.router.navigateByUrl("");
+        });
+    }
 
 
 }

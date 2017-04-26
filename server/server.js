@@ -34,6 +34,9 @@ db.open(function(){
     db.collection('sections', function(error, sections) {
         db.sections = sections;
     });
+    db.collection('users', function(error, users) {
+        db.users = users;
+    });
 });
 
 
@@ -95,6 +98,12 @@ app.get("/checkUserUnique", function(req,res) {
     res.end();
 });
 
+app.post("/users", function(req,res) {
+    db.users.insert(req.body, function(resp) {
+        req.session.userName = req.body.userName;
+        res.end();
+    });
+});
 
 
 app.listen(3000, function(){
