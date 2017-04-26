@@ -49,7 +49,7 @@ app.get("/notes", function(req,res) {
     });
 });
 app.post("/notes", function(req,res) {
-    let note = req.body;
+    var note = req.body;
     note.date = new Date();
 c.log(note);
     db.notes.insert(note);
@@ -87,6 +87,12 @@ app.get("/sections", function(req,res) {
     db.sections.find(req.query).toArray(function(err, items) {
         res.send(items);
     });
+});
+
+
+app.get("/checkUserUnique", function(req,res) {
+    res.send(false);
+    res.end();
 });
 
 
