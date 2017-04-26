@@ -6,5 +6,15 @@ import {User} from "./model/User";
     templateUrl: 'app/userForm/userForm.component.html'
 })
 export class UserFormComponent {
-    user:User;
+    user:User = {
+        name:'',
+        password:'',
+        password2:'',
+        subscribe: false,
+        email:'',
+        dateOfBirth: null
+    };
+
+
+
 }

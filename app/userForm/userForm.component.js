@@ -9,6 +9,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var UserFormComponent = (function () {
     function UserFormComponent() {
+        this.user = {
+            name: '',
+            password: '',
+            password2: '',
+            subscribe: false,
+            email: '',
+            dateOfBirth: null
+        };
     }
     return UserFormComponent;
 }());
