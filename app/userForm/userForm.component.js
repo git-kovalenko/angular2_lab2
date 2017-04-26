@@ -23,7 +23,8 @@ var UserFormComponent = (function () {
 UserFormComponent = __decorate([
     core_1.Component({
         selector: 'userForm',
-        templateUrl: 'app/userForm/userForm.component.html'
+        templateUrl: 'app/userForm/userForm.component.html',
+        styles: ["\n        input.ng-touched.ng-invalid{\n            background-color: #ffe8f1;\n        }\n    "]
     })
 ], UserFormComponent);
 exports.UserFormComponent = UserFormComponent;

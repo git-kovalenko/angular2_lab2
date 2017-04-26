@@ -3,7 +3,12 @@ import {User} from "./model/User";
 
 @Component({
     selector:'userForm',
-    templateUrl: 'app/userForm/userForm.component.html'
+    templateUrl: 'app/userForm/userForm.component.html',
+    styles: [`
+        input.ng-touched.ng-invalid{
+            background-color: #ffe8f1;
+        }
+    `]
 })
 export class UserFormComponent {
     user:User = {
