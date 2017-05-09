@@ -14,10 +14,8 @@ export class UserUniqueValidator implements Validator{
         const params: URLSearchParams = new URLSearchParams();
         params.set('user', user);
 
-
-
         return new Promise(resolve =>
-            this.http.get("/checkUserUnique", params)
+            this.http.get("/checkUserUnique", {search:params.toString()})
                 .map(    response => response.json())
                 .subscribe(
                     // function(res){console.log(res)}

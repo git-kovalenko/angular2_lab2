@@ -22,7 +22,7 @@ var UserUniqueValidator = UserUniqueValidator_1 = (function () {
         var params = new URLSearchParams();
         params.set('user', user);
         return new Promise(function (resolve) {
-            return _this.http.get("/checkUserUnique", params)
+            return _this.http.get("/checkUserUnique", { search: params.toString() })
                 .map(function (response) { return response.json(); })
                 .subscribe(
             // function(res){console.log(res)}

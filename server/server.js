@@ -94,7 +94,13 @@ app.get("/sections", function(req,res) {
 
 
 app.get("/checkUserUnique", function(req,res) {
-    res.send(false);
+    db.users.find({name:req.query.user}).toArray(function(err, items){
+        c.log(!items);
+        res.send(!items);
+    });
+
+
+    //res.send(req.query.user.length>2);
     res.end();
 });
 
