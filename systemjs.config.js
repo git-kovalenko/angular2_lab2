@@ -28,7 +28,8 @@
       'angular-in-memory-web-api': 'npm:angular-in-memory-web-api',
 
       'ng2-dragula': 'npm:ng2-dragula/ng2-dragula',
-      'dragula': 	'npm:dragula/dist/dragula.js'
+      'dragula': 	'npm:dragula/dist/dragula.js',
+        'moment': 'npm:moment/moment'
     },
     // packages tells the System loader how to load when no filename and/or no extension
     packages: {

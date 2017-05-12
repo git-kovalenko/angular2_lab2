@@ -35,7 +35,8 @@
     "zone.js": "^0.6.25",
     "mongodb": "*",
     "dragula": "^3.7.2",
-    "ng2-dragula": "^1.2.2-0"
+    "ng2-dragula": "^1.2.2-0",
+    "moment": "latest"
   },
   "devDependencies": {
     "concurrently": "^3.0.0",

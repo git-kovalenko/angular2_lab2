@@ -24,6 +24,7 @@ var CanDeactivateNote_1 = require("./CanDeactivateNote");
 var userForm_component_1 = require("./userForm/userForm.component");
 var EqualToValidator_1 = require("./userForm/directives/EqualToValidator");
 var UserUniqueValidator_1 = require("./userForm/directives/UserUniqueValidator");
+var AgeGtValidator_1 = require("./userForm/directives/AgeGtValidator");
 var appRoutes = [
     { path: '', component: NotesEditorComponent_1.NotesEditorComponent, canDeactivate: [CanDeactivateNote_1.CanDeactivateNote] },
     { path: 'viewSection/:name', component: ViewSectionComponent_1.ViewSectionComponent },
@@ -39,7 +40,7 @@ var AppModule = (function () {
 AppModule = __decorate([
     core_1.NgModule({
         imports: [platform_browser_1.BrowserModule, forms_1.FormsModule, http_1.HttpModule, ng2_dragula_1.DragulaModule, router_1.RouterModule.forRoot(appRoutes)],
-        declarations: [app_component_1.AppComponent, notes_component_1.NotesComponent, sections_component_1.SectionsComponent, SectionFilterPipe_1.SectionFilterPipe, NotesEditorComponent_1.NotesEditorComponent, PageNotFoundComponent_1.PageNotFoundComponent, ViewSectionComponent_1.ViewSectionComponent, userForm_component_1.UserFormComponent, EqualToValidator_1.EqualToValidator, UserUniqueValidator_1.UserUniqueValidator],
+        declarations: [app_component_1.AppComponent, notes_component_1.NotesComponent, sections_component_1.SectionsComponent, SectionFilterPipe_1.SectionFilterPipe, NotesEditorComponent_1.NotesEditorComponent, PageNotFoundComponent_1.PageNotFoundComponent, ViewSectionComponent_1.ViewSectionComponent, userForm_component_1.UserFormComponent, EqualToValidator_1.EqualToValidator, UserUniqueValidator_1.UserUniqueValidator, AgeGtValidator_1.AgeGtValidator],
         bootstrap: [app_component_1.AppComponent],
         providers: [NotesServerService_1.NotesServerService, CanDeactivateNote_1.CanDeactivateNote]
     })
